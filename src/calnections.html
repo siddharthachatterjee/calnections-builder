@@ -1,27 +1,5 @@
-import logo from './logo.svg';
-import './App.css';
-import Connections from './Connections';
-import { useState } from 'react';
 
-
-
-function App() {
-  const [author, setAuthor] = useState("");
-  const [authorEmail, setAuthorEmail] = useState("");
-  const [categories, setCategories] = useState({
-    0: "1", 1: "2", 2: "3", 3: "4"
-  });
-  const [boxes, setBoxes] = useState(Array(16).fill(null).map((_, i) => ({text: "placeholder", category: categories[i % 4]})));
-  const [html, setHTML] = useState("");
-
-  function toBase64(str) 
-{
-    const uint8Array = new TextEncoder().encode(str);
-    return btoa(String.fromCharCode(...uint8Array));
-}
-  function generateHTTML() {
-    return `
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -199,7 +177,7 @@ function App() {
   <div class="game-container">
     <h1>‘CAL’-nections</h1>
     <div class="subtitle">Create groups of four!</div>
-    <div class="byline">By ${author} • Staff • ${authorEmail}</div>
+    <div class="byline">By  • Staff • </div>
     <div class="copyright-line">© 2025 The Daily Californian</div>
     <div class="status-bar">
       <div>Groups solved: <span id="groups-solved">0</span>/4</div>
@@ -221,14 +199,27 @@ function App() {
     // ===== CONFIGURE YOUR PUZZLE HERE =====
     // Four groups, each with a category and 4 words.
     const PUZZLE = [
-      ${Object.values(categories).map((category, i) => (
-        `
+      
         {
-          category: "${category}",
-          words: ${JSON.stringify(boxes.filter((c, j) => j%4 == i).map(b => b.text))}
+          category: "1",
+          words: ["placeholder","placeholder","placeholder","placeholder"]
         },
-        `
-      ))}
+        ,
+        {
+          category: "2",
+          words: ["placeholder","placeholder","placeholder","placeholder"]
+        },
+        ,
+        {
+          category: "3",
+          words: ["placeholder","placeholder","placeholder","placeholder"]
+        },
+        ,
+        {
+          category: "4",
+          words: ["placeholder","placeholder","placeholder","placeholder"]
+        },
+        
     ];
 
     // ===== GAME LOGIC =====
@@ -381,99 +372,4 @@ function App() {
   </script>
 </body>
 </html>
-    `
-  }
-  return (
-    <div className="App">
-         <div className="container">
-            <div className="hero">
-                <h1> Cal-Nections Builder </h1>
-                Author: <input type = "text" value = {author} onChange={e => setAuthor(e.target.value)}/>
-                <br />
-                <br />
-                Email: <input type = "text" value = {authorEmail} onChange={e => setAuthorEmail(e.target.value)}/>
-                <br />
-                <br />
-                Set categories and words for each category below (grid will be shuffled when displayed to user)
-                <br />
-                <br />
-            </div>
-            <main>
-             
-              <div className='fields'>
-                <div className='categories'>
-                  <h2> Categories: </h2>
-                  <ol>
-                    {Object.values(categories).map((category, i) => (
-                     <li>
-                         <textarea value = {category} onChange={e => setCategories(prev => ({...prev, [i]: e.target.value}))} />
-                        
-                     </li>
-                    ))}
-                  </ol>
-                </div>
-                <div className='grid'>
-                  {Object.values(categories).map((category, i) => (
-                    <div className='row'>
-                      <div className='category-name' style = {{maxWidth: "100%", overflowX: "scroll", textWrap: "nowrap"}}>Category: {category} </div>
-                      {boxes.map((box, j) =>  (j % 4 == i)&& (
-                        <div className='box'>
-                          Text: 
-                        <input value={boxes[j].text} onChange={e => {
-                          setBoxes(prev => {
-                            let newBoxes = [...prev];
-                            newBoxes[j].text = e.target.value;
-                            return newBoxes
-                          })}}  />
-                          </div>
-                      ))}
-                    </div>
-                    // <div className='box'>
-                    //   Text: 
-                    //   <input value={boxes[i].text} onChange={e => {
-                    //     setBoxes(prev => {
-                    //       let newBoxes = [...prev];
-                    //       newBoxes[i].text = e.target.value;
-                    //       return newBoxes
-                    //     })}}  />
-                    //     {/* Category:
-                    //     <select style = {{maxWidth: "90%"}} value= {boxes[i].category} onChange={e => {
-                    //           setBoxes(prev => {
-                    //             let newBoxes = [...prev];
-                    //             newBoxes[i].category = e.target.value;
-                    //             return newBoxes
-                    //           })}}>
-                    //       {Object.values(categories).map((category) => (
-                    //         <option value ={category}  > {category} </option>
-                    //       ))}
-                    //     </select> */}
-                    //   </div>
-                      
-                   
-                  ))}
-                </div>
-                <div className='generate'>
-                  {/* <button onClick = {() => {
-                   // try {
-                   let html = generateHTTML();
-                   setHTML(html);
-                      navigator.clipboard.writeText(generateHTTML());
-                    // }
-                    // catch (err) {
-
-                    // }
-                  }}> Generate HTML </button> */}
-                  <br />
-                  {/* <div className='html'>
-                    {html}
-                  </div> */}
-                  <a href = {`data:text/html;base64,${toBase64(generateHTTML())}`} download={true} title={`${author}-calnections.html`}> Download HTML  </a>
-                </div>
-              </div>
-            </main>
-        </div>
-    </div>
-  );
-}
-
-export default App;
+    
