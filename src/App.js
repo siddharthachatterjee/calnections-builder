@@ -9,8 +9,10 @@ function App() {
   const [categories, setCategories] = useState({
     0: "1", 1: "2", 2: "3", 3: "4"
   });
+  const [title, setTitle] = useState("");
   const [boxes, setBoxes] = useState(Array(16).fill(null).map((_, i) => ({text: "placeholder", category: categories[i % 4]})));
-  
+  const [copied, setCopied] = useState(false);
+  const [publishDate, setPublishDate] = useState()
 
   function toBase64(str) 
 {
@@ -23,7 +25,7 @@ function App() {
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>‘CAL’-nections</title>
+  <title> ${title}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     :root {
@@ -198,7 +200,7 @@ function App() {
     <h1>‘CAL’-nections</h1>
     <div class="subtitle">Create groups of four!</div>
     <div class="byline">By ${author} • Staff • ${authorEmail}</div>
-    <div class="copyright-line">© 2025 The Daily Californian</div>
+    <div class="copyright-line">© 2026 The Daily Californian</div>
     <div class="status-bar">
       <div>Groups solved: <span id="groups-solved">0</span>/4</div>
       <div class="strikes">Strikes: <span id="strikes">0</span>/4</div>
@@ -386,10 +388,22 @@ function App() {
          <div className="container">
             <div className="hero">
                 <h1> Cal-Nections Builder </h1>
-                Author: <input type = "text" value = {author} onChange={e => setAuthor(e.target.value)}/>
+                Author: <input type = "text" value = {author} onChange={e => {
+                  setAuthor(e.target.value);
+                  setCopied(false);
+                }}/>
                 <br />
                 <br />
-                Email: <input type = "text" value = {authorEmail} onChange={e => setAuthorEmail(e.target.value)}/>
+                Email: <input type = "text" value = {authorEmail} onChange={e => {
+                  setAuthorEmail(e.target.value)
+                  setCopied(false);
+                }}/>
+                <br />
+                <br />
+                Title: <input type = "text" value = {title} onChange={e => {
+                  setTitle(e.target.value)
+                  setCopied(false);
+                }}/>
                 <br />
                 <br />
                 Set categories and words for each category below (grid will be shuffled when displayed to user)
@@ -404,7 +418,10 @@ function App() {
                   <ol>
                     {Object.values(categories).map((category, i) => (
                      <li>
-                         <textarea value = {category} onChange={e => setCategories(prev => ({...prev, [i]: e.target.value}))} />
+                         <textarea value = {category} onChange={e => {
+                          setCategories(prev => ({...prev, [i]: e.target.value}))
+                          setCopied(false);
+                        }} />
                         
                      </li>
                     ))}
@@ -418,6 +435,7 @@ function App() {
                         <div className='box'>
                           Text: 
                         <input value={boxes[j].text} onChange={e => {
+                          setCopied(false);
                           setBoxes(prev => {
                             let newBoxes = [...prev];
                             newBoxes[j].text = e.target.value;
@@ -451,16 +469,19 @@ function App() {
                   ))}
                 </div>
                 <div className='generate'>
-                  {/* <button onClick = {() => {
+                  <button className={copied && "copied"} onClick = {() => {
                    // try {
                    let html = generateHTTML();
-                   setHTML(html);
+                  // setHTML(html);
                       navigator.clipboard.writeText(generateHTTML());
+                      setCopied(true)
                     // }
                     // catch (err) {
 
                     // }
-                  }}> Generate HTML </button> */}
+                  }}> {copied? "Copied" : "Copy"} HTML text to Clipboard </button>
+                  <br />
+                  <br />
                   <br />
                   {/* <div className='html'>
                     {html}
