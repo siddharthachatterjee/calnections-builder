@@ -9,7 +9,7 @@ function App() {
   const [categories, setCategories] = useState({
     0: "1", 1: "2", 2: "3", 3: "4"
   });
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState("'Cal'-nections");
   const [boxes, setBoxes] = useState(Array(16).fill(null).map((_, i) => ({text: "placeholder", category: categories[i % 4]})));
   const [copied, setCopied] = useState(false);
   // const [publishDate, setPublishDate] = useState()
@@ -197,7 +197,7 @@ function App() {
 </head>
 <body>
   <div class="game-container">
-    <h1>‘CAL’-nections</h1>
+    <h1>${title}</h1>
     <div class="subtitle">Create groups of four!</div>
     <div class="byline">By ${author} • Staff • ${authorEmail}</div>
     <div class="copyright-line">© 2026 The Daily Californian</div>
