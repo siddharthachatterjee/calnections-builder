@@ -486,7 +486,7 @@ function App() {
                   {/* <div className='html'>
                     {html}
                   </div> */}
-                  <a href = {`data:text/html;base64,${toBase64(generateHTTML())}`} download={true} title={`${author}-calnections.html`} target='_blank'> Download HTML  </a>
+                  <a href = {`data:text/html;base64,${toBase64(generateHTTML())}`} download={true} title={`${author}-calnections.html`}> Download HTML  </a>
                 </div>
               </div>
             </main>
