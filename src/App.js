@@ -12,7 +12,7 @@ function App() {
   const [title, setTitle] = useState("");
   const [boxes, setBoxes] = useState(Array(16).fill(null).map((_, i) => ({text: "placeholder", category: categories[i % 4]})));
   const [copied, setCopied] = useState(false);
-  const [publishDate, setPublishDate] = useState()
+  // const [publishDate, setPublishDate] = useState()
 
   function toBase64(str) 
 {
@@ -471,7 +471,7 @@ function App() {
                 <div className='generate'>
                   <button className={copied && "copied"} onClick = {() => {
                    // try {
-                   let html = generateHTTML();
+                   //let html = generateHTTML();
                   // setHTML(html);
                       navigator.clipboard.writeText(generateHTTML());
                       setCopied(true)
