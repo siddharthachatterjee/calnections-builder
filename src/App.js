@@ -136,10 +136,10 @@ function App() {
       font-size: 0.8rem;
       opacity: 0.9;
     }
-    .group-color-0 { background: #98c021; } /* green */
-    .group-color-1 { background: #f7d83b; } /* yellow */
-    .group-color-2 { background: #07bbc9; } /* blue */
-    .group-color-3 { background: #a269c6; } /* purple */
+    .group-color-1 { background: #a0bf44; } /* green */
+    .group-color-0 { background: #f2d95c; } /* yellow */
+    .group-color-2 { background: #55b8c7; } /* blue */
+    .group-color-3 { background: #9a6cc1; } /* purple */
 
     .button-row {
       display: flex;
@@ -226,7 +226,7 @@ function App() {
         {
           category: "${category}",
           words: ${JSON.stringify(boxes.filter((c, j) => j%4 === i).map(b => b.text))}
-        },
+        }
         `
       ))}
     ];
@@ -486,7 +486,7 @@ function App() {
                   {/* <div className='html'>
                     {html}
                   </div> */}
-                  <a href = {`data:text/html;base64,${toBase64(generateHTTML())}`} download={true} title={`${author}-calnections.html`}> Download HTML  </a>
+                  <a href = {`data:text/html;base64,${toBase64(generateHTTML())}`} download={true} title={`${author}-calnections.html`} target='_blank'> Download HTML  </a>
                 </div>
               </div>
             </main>
