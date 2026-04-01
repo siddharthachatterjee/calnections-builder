@@ -1,6 +1,4 @@
-import logo from './logo.svg';
 import './App.css';
-import Connections from './Connections';
 import { useState } from 'react';
 
 
@@ -12,7 +10,7 @@ function App() {
     0: "1", 1: "2", 2: "3", 3: "4"
   });
   const [boxes, setBoxes] = useState(Array(16).fill(null).map((_, i) => ({text: "placeholder", category: categories[i % 4]})));
-  const [html, setHTML] = useState("");
+  
 
   function toBase64(str) 
 {
@@ -225,7 +223,7 @@ function App() {
         `
         {
           category: "${category}",
-          words: ${JSON.stringify(boxes.filter((c, j) => j%4 == i).map(b => b.text))}
+          words: ${JSON.stringify(boxes.filter((c, j) => j%4 === i).map(b => b.text))}
         },
         `
       ))}
@@ -416,7 +414,7 @@ function App() {
                   {Object.values(categories).map((category, i) => (
                     <div className='row'>
                       <div className='category-name' style = {{maxWidth: "100%", overflowX: "scroll", textWrap: "nowrap"}}>Category: {category} </div>
-                      {boxes.map((box, j) =>  (j % 4 == i)&& (
+                      {boxes.map((box, j) =>  (j % 4 === i)&& (
                         <div className='box'>
                           Text: 
                         <input value={boxes[j].text} onChange={e => {
